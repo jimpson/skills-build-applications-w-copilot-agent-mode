@@ -1,16 +1,36 @@
-# React + Vite
+# OctoFit Tracker presentation tier
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The React 19 and Vite frontend uses React Router for navigation and Bootstrap
+for responsive styling. It reads users, teams, activities, leaderboard entries,
+and workout suggestions from the Express API.
 
-Currently, two official plugins are available:
+## Run the frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Install dependencies and start the Vite development server:
 
-## React Compiler
+```bash
+npm install --prefix octofit-tracker/frontend
+npm run dev --prefix octofit-tracker/frontend
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+In GitHub Codespaces, the frontend detects its forwarded `5173` hostname and
+uses the corresponding forwarded `8000` API hostname automatically. To
+explicitly configure it, create `octofit-tracker/frontend/.env.local` and set
+`VITE_CODESPACE_NAME` to the Codespace name:
 
-## Expanding the ESLint configuration
+```dotenv
+VITE_CODESPACE_NAME=your-codespace-name
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Vite loads `.env.local` when it starts, so restart the dev server after changing
+this value. The API base URL will be
+`https://your-codespace-name-8000.app.github.dev`. Outside Codespaces, the
+frontend safely falls back to `http://localhost:8000`.
+
+## Available views
+
+- `/activities`
+- `/leaderboard`
+- `/teams`
+- `/users`
+- `/workouts`
